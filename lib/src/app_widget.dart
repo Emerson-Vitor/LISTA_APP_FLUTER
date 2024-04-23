@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:listinha/src/home/home_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:listinha/src/shared/store/app_store.dart';
 import 'package:listinha/src/shared/themes/themes.dart';
 
-import '../main.dart';
+import 'configuration/configuration_page.dart';
+
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -10,12 +12,21 @@ class AppWidget extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    Modular.setInitialRoute('/home/');
+    final appStore = context.watch<AppStore>(
+        (store) => store.themeMode,
+    );
+    return MaterialApp.router(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      themeMode: appStore.themeMode.value ,
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: const HomePage(),
+      routerDelegate: Modular.routerDelegate,
+      routeInformationParser: Modular.routeInformationParser,
+
     );
   }
 }
+
+

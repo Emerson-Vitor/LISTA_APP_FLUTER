@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:listinha/src/shared/widgets/user_image_button.dart';
 
-import '../shared/widgets/custom_drawer.dart';
+import 'widgets/custom_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePgeState extends State<HomePage> {
+  int ndexButtonSegment = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,16 +31,44 @@ class _HomePgeState extends State<HomePage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(9),
               child: SegmentedButton<int>(
                 segments: const [
-                  ButtonSegment(value: 0, label: Text('Todos')),
-                  ButtonSegment(value: 1, label: Text('Pendentes')),
-                  ButtonSegment(value: 2, label: Text('Concluídas')),
-                  ButtonSegment(value: 3, label: Text('Desativadas')),
+                  ButtonSegment(
+                    value: 0,
+                    label: Text(
+                      'Todos',
+                      softWrap: false,
+                    ),
+                  ),
+                  ButtonSegment(
+                    value: 1,
+                    label: Text(
+                      'Pendentes',
+                      softWrap: false,
+                    ),
+                  ),
+                  ButtonSegment(
+                    value: 2,
+                    label: Text(
+                      'Concluídas',
+                      softWrap: false,
+                    ),
+                  ),
+                  ButtonSegment(
+                    value: 3,
+                    label: Text(
+                      'Desativadas',
+                      softWrap: false,
+                    ),
+                  ),
                 ],
-                selected: const {1},
-                onSelectionChanged: (values) {},
+                onSelectionChanged: (Set<int> values) {
+                  setState(() {
+                    ndexButtonSegment = values.first;
+                  });
+                },
+                selected: <int>{ndexButtonSegment},
               ),
             ),
           ],
@@ -48,9 +78,7 @@ class _HomePgeState extends State<HomePage> {
         icon: const Icon(Icons.edit),
         label: const Text('Nova lista'),
         onPressed: () {
-          if (kDebugMode) {
-            print('oi');
-          }
+          Navigator.of(context).pushNamed('./edit');
         },
       ),
     );

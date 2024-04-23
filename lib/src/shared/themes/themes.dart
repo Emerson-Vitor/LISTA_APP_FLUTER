@@ -33,11 +33,17 @@ ThemeData get darkTheme => ThemeData(
 
 SegmentedButtonThemeData get _segmentedButtonTheme => SegmentedButtonThemeData(
   style: ButtonStyle(
+
+    padding: MaterialStateProperty.all(const EdgeInsets.fromLTRB(8, -5, 8, -5)),
+    iconSize: MaterialStateProperty.all(13),
     textStyle: MaterialStateProperty.resolveWith<TextStyle?>((states) {
       if (states.contains(MaterialState.selected)) {
-        return const TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
+        return const TextStyle(fontSize: 11, fontWeight: FontWeight.bold);
       }
-      return const TextStyle(fontSize: 11);
+      else{
+        return const TextStyle(fontSize: 12);
+      }
+
     }),
   ),
 );

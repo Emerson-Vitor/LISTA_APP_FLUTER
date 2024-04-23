@@ -5,13 +5,18 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  NavigationDrawer(
+    return NavigationDrawer(
+      onDestinationSelected: (index) {
+        if (index == 1) {
+          Navigator.pop(context);
+          Navigator.of(context).pushNamed('/config');
+        }
+      },
       children: [
         Padding(
           padding:
-          const EdgeInsets.only(top: 28, right: 16, left: 16, bottom: 16),
-          child:
-          Text('Opçôes', style: Theme.of(context).textTheme.titleSmall),
+              const EdgeInsets.only(top: 28, right: 16, left: 16, bottom: 16),
+          child: Text('Opçôes', style: Theme.of(context).textTheme.titleSmall),
         ),
         NavigationDrawerDestination(
           icon: const Icon(Icons.sync),
