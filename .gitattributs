@@ -1,0 +1,4 @@
+* lingust-vendored
+*.kt linguist-vendored=false
+*.kts linguist-vendored=false
+*.dart linguist-vendored=false
